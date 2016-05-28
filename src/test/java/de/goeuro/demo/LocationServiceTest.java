@@ -15,13 +15,14 @@ import java.net.URL;
 import java.util.Optional;
 
 import static java.lang.String.format;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.any;
+import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -79,6 +80,20 @@ public class LocationServiceTest {
         assertEquals("location", berlin.getType());
         assertTrue(new Double(52.52437).equals(berlin.getGeoPosition().getLatitude()));
         assertTrue(new Double(13.41053).equals(berlin.getGeoPosition().getLongitude()));
+    }
+
+    @Test
+    public void testSuggestPositionNotFound() {
+        //given:
+        MockRestServiceServer server = MockRestServiceServer.createServer(restTemplate);
+        server.expect(requestTo(any(String.class)))
+                .andRespond(withStatus(NOT_FOUND));
+
+        //when:
+        PositionSuggestion suggestion = service.suggestPosition("non-existent");
+
+        //then:
+        assertEquals(0, suggestion.getLocations().size());
     }
 
 }
