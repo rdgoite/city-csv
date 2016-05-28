@@ -1,5 +1,7 @@
 package de.goeuro.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
@@ -13,6 +15,8 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 public class LocationService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(LocationService.class);
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -22,6 +26,7 @@ public class LocationService {
         try {
             locations = restTemplate.getForObject(url, Location[].class);
         } catch (HttpStatusCodeException exception) {
+            LOGGER.debug(exception.getMessage());
             if (NOT_FOUND != exception.getStatusCode()) {
                 throw exception;
             }
