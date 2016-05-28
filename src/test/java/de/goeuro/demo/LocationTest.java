@@ -13,7 +13,7 @@ public class LocationTest {
         Location berlingerode = new Location(425332L, "location", "Berlingerode", 51.45775, 10.2384);
 
         //expect:
-        assertEquals("314827,airport,Berlin Sch\u00f6nefeld,52.388,13.5180874", schonefeld.toCsv());
+        assertEquals("314827,airport,Berlin Sch\u00f6nefeld,52.3887261,13.5180874", schonefeld.toCsv());
         assertEquals("425332,location,Berlingerode,51.45775,10.2384", berlingerode.toCsv());
     }
 

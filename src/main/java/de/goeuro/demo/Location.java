@@ -21,6 +21,6 @@ public class Location implements Serializable {
     }
 
     public String toCsv() {
-        return format("%d,%s,%s,%f,%f", id, type, name, geoPosition.getLatitude(), geoPosition.getLongitude());
+        return format("%d,%s,%s,%s,%s", id, type, name, geoPosition.getLatitude(), geoPosition.getLongitude());
     }
 }
