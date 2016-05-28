@@ -2,6 +2,8 @@ package de.goeuro.demo;
 
 import java.io.Serializable;
 
+import static java.lang.String.format;
+
 public class Location implements Serializable {
 
     private final long id;
@@ -19,6 +21,6 @@ public class Location implements Serializable {
     }
 
     public String toCsv() {
-        return "airport,Berlin Sch\u00f6nefeld,52.388,13.5180874";
+        return format("%d,%s,%s,%f,%f", id, type, name, geoPosition.getLatitude(), geoPosition.getLongitude());
     }
 }
