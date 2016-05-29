@@ -7,6 +7,8 @@ import java.util.List;
 
 public class CsvDownloadRunner implements ApplicationRunner {
 
+    public static final String KEYWORD_COUNT_MESSAGE = "Expected exactly 1 keyword.";
+
     private final CsvDownloader downloader;
 
     public CsvDownloadRunner(CsvDownloader downloader) {
@@ -16,7 +18,7 @@ public class CsvDownloadRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         List<String> nonOptionArgs = args.getNonOptionArgs();
-        if (!nonOptionArgs.isEmpty()) {
+        if (nonOptionArgs.size() == 1) {
             String keyword = nonOptionArgs.get(0);
             String override = "false";
             String forceOption = "force";
@@ -25,7 +27,7 @@ public class CsvDownloadRunner implements ApplicationRunner {
             }
             downloader.download(keyword, Boolean.parseBoolean(override));
         } else {
-            System.out.println("No keyword specified.");
+            System.out.println(KEYWORD_COUNT_MESSAGE);
         }
     }
 

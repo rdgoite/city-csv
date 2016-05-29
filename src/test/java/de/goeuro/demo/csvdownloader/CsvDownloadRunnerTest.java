@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.test.OutputCapture;
 
+import static de.goeuro.demo.CsvDownloadRunner.KEYWORD_COUNT_MESSAGE;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
@@ -77,7 +78,20 @@ public class CsvDownloadRunnerTest {
         verify(downloader, never()).download(anyString(), anyBoolean());
 
         //and:
-        outputCapture.expect(is("No keyword specified.\n"));
+        outputCapture.expect(is(KEYWORD_COUNT_MESSAGE + "\n"));
+    }
+
+    @Test
+    public void testRunMoreThanOneKeyword() throws Exception {
+        //given:
+        ApplicationArguments arguments = mock(ApplicationArguments.class);
+        doReturn(asList("Berlin", "Leipzig")).when(arguments).getNonOptionArgs();
+
+        //when:
+        runner.run(arguments);
+
+        //then:
+        outputCapture.expect(is(KEYWORD_COUNT_MESSAGE + "\n"));
     }
 
 }
