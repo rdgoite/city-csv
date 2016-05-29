@@ -19,8 +19,10 @@ import java.util.List;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
@@ -78,6 +80,31 @@ public class CsvDownloaderTest {
             assertEquals(expectedOutput, reader.readLine());
         }
         reader.close();
+    }
+
+    @Test
+    public void testDownloadNoResults() throws Exception {
+        //given:
+        PositionSuggestion suggestion = new PositionSuggestion(emptyList());
+        doReturn(suggestion).when(locationService).suggestPosition(anyString());
+
+        //when:
+        downloader.download("non existent");
+
+        //then:
+        String expectedFileName = "location.csv";
+        File outputFile = new File(expectedFileName);
+        assertTrue(outputFile.exists());
+        temporaryFiles.add(expectedFileName);
+
+        //and:
+        BufferedReader reader = new BufferedReader(new FileReader(outputFile));
+        try {
+            assertTrue(reader.ready());
+            assertEquals("# no results found", reader.readLine());
+        } finally {
+            reader.close();
+        }
     }
 
 }

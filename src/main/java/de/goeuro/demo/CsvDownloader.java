@@ -15,23 +15,26 @@ public class CsvDownloader {
     private LocationService locationService;
 
     public void download(String keyword) {
+        PositionSuggestion suggestion = locationService.suggestPosition(keyword);
         try {
             File outputFile = new File("location.csv");
-            if (outputFile.createNewFile()) {
-                doDownload(keyword, outputFile);
-            }
+            outputFile.createNewFile();
+            List<Location> locations = suggestion.getLocations();
+            writeOutput(locations, outputFile);
         } catch (Exception exception) {
             throw new RuntimeException(exception);
         }
     }
 
-    private void doDownload(String keyword, File outputFile) throws Exception {
-        PositionSuggestion suggestion = locationService.suggestPosition(keyword);
+    private void writeOutput(List<Location> locations, File outputFile) throws Exception {
         FileWriter writer = new FileWriter(outputFile);
-        List<Location> locations = suggestion.getLocations();
         try {
-            for (Location location : locations) {
-                writer.write(format("%s\n", location.toCsv()));
+            if (!locations.isEmpty()) {
+                for (Location location : locations) {
+                    writer.write(format("%s\n", location.toCsv()));
+                }
+            } else {
+                writer.write("# no results found");
             }
         } finally {
             writer.close();
