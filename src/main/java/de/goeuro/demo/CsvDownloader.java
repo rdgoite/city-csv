@@ -29,13 +29,10 @@ public class CsvDownloader {
     private void writeOutput(List<Location> locations, File outputFile) throws Exception {
         FileWriter writer = new FileWriter(outputFile);
         try {
-            if (!locations.isEmpty()) {
-                for (Location location : locations) {
-                    writer.write(format("%s\n", location.toCsv()));
-                }
-            } else {
-                writer.write("# no results found");
+            for (Location location : locations) {
+                writer.write(format("%s\n", location.toCsv()));
             }
+            if (locations.isEmpty()) writer.write("# no results found");
         } finally {
             writer.close();
         }
