@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.test.OutputCapture;
 
-import static de.goeuro.demo.CsvDownloadRunner.KEYWORD_COUNT_MESSAGE;
+import static de.goeuro.demo.CsvDownloadRunner.MESSAGE_KEYWORD_COUNT;
 import static de.goeuro.demo.CsvDownloadRunner.MESSAGE_SUCCESS;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
@@ -84,7 +84,7 @@ public class CsvDownloadRunnerTest {
         verify(downloader, never()).download(anyString(), anyBoolean());
 
         //and:
-        consoleOutput.expect(is(KEYWORD_COUNT_MESSAGE + "\n"));
+        consoleOutput.expect(is(MESSAGE_KEYWORD_COUNT + "\n"));
     }
 
     @Test
@@ -97,7 +97,7 @@ public class CsvDownloadRunnerTest {
         runner.run(arguments);
 
         //then:
-        consoleOutput.expect(is(KEYWORD_COUNT_MESSAGE + "\n"));
+        consoleOutput.expect(is(MESSAGE_KEYWORD_COUNT + "\n"));
     }
 
 }

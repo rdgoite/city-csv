@@ -8,7 +8,7 @@ import java.util.List;
 public class CsvDownloadRunner implements ApplicationRunner {
 
     public static final String MESSAGE_SUCCESS = "Download completed with no errors.";
-    public static final String KEYWORD_COUNT_MESSAGE = "Expected exactly 1 keyword.";
+    public static final String MESSAGE_KEYWORD_COUNT = "Expected exactly 1 keyword.";
 
     private final CsvDownloader downloader;
 
@@ -29,7 +29,7 @@ public class CsvDownloadRunner implements ApplicationRunner {
             downloader.download(keyword, Boolean.parseBoolean(override));
             System.out.println(MESSAGE_SUCCESS);
         } else {
-            System.out.println(KEYWORD_COUNT_MESSAGE);
+            System.out.println(MESSAGE_KEYWORD_COUNT);
         }
     }
 
