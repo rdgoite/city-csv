@@ -30,6 +30,8 @@ public class CsvDownloadRunnerTest {
     public void testRun() throws Exception {
         //given:
         String searchKey = "Berlin";
+
+        //and:
         ApplicationArguments arguments = mock(ApplicationArguments.class);
         doReturn(asList(searchKey)).when(arguments).getNonOptionArgs();
 
@@ -38,6 +40,24 @@ public class CsvDownloadRunnerTest {
 
         //then:
         verify(downloader).download(searchKey, false);
+    }
+
+    @Test
+    public void testRunOverride() throws Exception {
+        //given:
+        String searchKey = "Hamburg";
+
+        //and:
+        ApplicationArguments arguments = mock(ApplicationArguments.class);
+        doReturn(true).when(arguments).containsOption("force");
+        doReturn(asList("true")).when(arguments).getOptionValues("force");
+        doReturn(asList(searchKey)).when(arguments).getNonOptionArgs();
+
+        //when:
+        runner.run(arguments);
+
+        //then:
+        verify(downloader).download(searchKey, true);
     }
 
 }

@@ -13,7 +13,13 @@ public class CsvDownloadRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        downloader.download("Berlin", false);
+        String keyword = args.getNonOptionArgs().get(0);
+        String override = "false";
+        String forceOption = "force";
+        if (args.containsOption(forceOption)) {
+            override = args.getOptionValues(forceOption).get(0);
+        }
+        downloader.download(keyword, Boolean.parseBoolean(override));
     }
 
 }
