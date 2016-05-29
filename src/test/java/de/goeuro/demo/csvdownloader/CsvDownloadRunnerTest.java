@@ -2,15 +2,17 @@ package de.goeuro.demo.csvdownloader;
 
 import de.goeuro.demo.CsvDownloadRunner;
 import de.goeuro.demo.CsvDownloader;
+import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.test.OutputCapture;
 
 import static java.util.Arrays.asList;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class CsvDownloadRunnerTest {
@@ -19,6 +21,9 @@ public class CsvDownloadRunnerTest {
     private CsvDownloader downloader;
 
     private CsvDownloadRunner runner;
+
+    @Rule
+    public OutputCapture outputCapture = new OutputCapture();
 
     @Before
     public void setUp() {
@@ -58,6 +63,21 @@ public class CsvDownloadRunnerTest {
 
         //then:
         verify(downloader).download(searchKey, true);
+    }
+
+    @Test
+    public void testRunNoKeyword() throws Exception {
+        //given:
+        ApplicationArguments arguments = mock(ApplicationArguments.class);
+
+        //when:
+        runner.run(arguments);
+
+        //then:
+        verify(downloader, never()).download(anyString(), anyBoolean());
+
+        //and:
+        outputCapture.expect(is("No keyword specified.\n"));
     }
 
 }
