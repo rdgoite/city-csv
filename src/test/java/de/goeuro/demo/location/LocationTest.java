@@ -1,5 +1,6 @@
-package de.goeuro.demo;
+package de.goeuro.demo.location;
 
+import de.goeuro.demo.Location;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

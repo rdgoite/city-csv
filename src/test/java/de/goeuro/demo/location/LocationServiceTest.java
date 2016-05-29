@@ -1,7 +1,10 @@
-package de.goeuro.demo;
+package de.goeuro.demo.location;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+import de.goeuro.demo.Location;
+import de.goeuro.demo.LocationService;
+import de.goeuro.demo.PositionSuggestion;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

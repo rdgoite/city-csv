@@ -1,5 +1,6 @@
-package de.goeuro.demo;
+package de.goeuro.demo.location;
 
+import de.goeuro.demo.LocationService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

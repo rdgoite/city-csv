@@ -2,13 +2,10 @@ package de.goeuro.demo.csvdownloader;
 
 import de.goeuro.demo.CsvDownloader;
 import de.goeuro.demo.LocationService;
-import de.goeuro.demo.LocationTestConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import de.goeuro.demo.location.LocationTestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.Mockito.mock;
 
