@@ -75,11 +75,14 @@ public class CsvDownloaderTest {
 
         //and:
         BufferedReader reader = new BufferedReader(new FileReader(outputFile));
-        for (String expectedOutput : csvOutput) {
-            assertTrue("No more lines to read from output file.", reader.ready());
-            assertEquals(expectedOutput, reader.readLine());
+        try {
+            for (String expectedOutput : csvOutput) {
+                assertTrue("No more lines to read from output file.", reader.ready());
+                assertEquals(expectedOutput, reader.readLine());
+            }
+        } finally {
+            reader.close();
         }
-        reader.close();
     }
 
     @Test
