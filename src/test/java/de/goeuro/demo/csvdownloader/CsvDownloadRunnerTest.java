@@ -2,7 +2,6 @@ package de.goeuro.demo.csvdownloader;
 
 import de.goeuro.demo.CsvDownloadRunner;
 import de.goeuro.demo.CsvDownloader;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,6 +10,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.test.OutputCapture;
 
 import static de.goeuro.demo.CsvDownloadRunner.KEYWORD_COUNT_MESSAGE;
+import static de.goeuro.demo.CsvDownloadRunner.MESSAGE_SUCCESS;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
@@ -24,7 +24,7 @@ public class CsvDownloadRunnerTest {
     private CsvDownloadRunner runner;
 
     @Rule
-    public OutputCapture outputCapture = new OutputCapture();
+    public OutputCapture consoleOutput = new OutputCapture();
 
     @Before
     public void setUp() {
@@ -46,6 +46,9 @@ public class CsvDownloadRunnerTest {
 
         //then:
         verify(downloader).download(searchKey, false);
+
+        //and:
+        consoleOutput.expect(is(MESSAGE_SUCCESS + "\n"));
     }
 
     @Test
@@ -64,6 +67,9 @@ public class CsvDownloadRunnerTest {
 
         //then:
         verify(downloader).download(searchKey, true);
+
+        //and:
+        consoleOutput.expect(is(MESSAGE_SUCCESS + "\n"));
     }
 
     @Test
@@ -78,7 +84,7 @@ public class CsvDownloadRunnerTest {
         verify(downloader, never()).download(anyString(), anyBoolean());
 
         //and:
-        outputCapture.expect(is(KEYWORD_COUNT_MESSAGE + "\n"));
+        consoleOutput.expect(is(KEYWORD_COUNT_MESSAGE + "\n"));
     }
 
     @Test
@@ -91,7 +97,7 @@ public class CsvDownloadRunnerTest {
         runner.run(arguments);
 
         //then:
-        outputCapture.expect(is(KEYWORD_COUNT_MESSAGE + "\n"));
+        consoleOutput.expect(is(KEYWORD_COUNT_MESSAGE + "\n"));
     }
 
 }
