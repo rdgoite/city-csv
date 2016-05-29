@@ -1,0 +1,195 @@
+[
+    {
+        "_id": 376217,
+        "alternativeNames": {},
+        "coreCountry": true,
+        "country": "Germany",
+        "countryCode": "DE",
+        "countryId": 56,
+        "distance": null,
+        "fullName": "Berlin, Germany",
+        "geo_position": {
+            "latitude": 52.52437,
+            "longitude": 13.41053
+        },
+        "iata_airport_code": null,
+        "inEurope": true,
+        "key": null,
+        "locationId": 8384,
+        "name": "Berlin",
+        "names": {
+            "ca": "Estat de Berl\u00edn",
+            "cs": "Berl\u00edn",
+            "es": "Berl\u00edn",
+            "fi": "Berliini",
+            "is": "Berl\u00edn",
+            "it": "Berlino",
+            "nl": "Berlijn",
+            "pt": "Berlim",
+            "ru": "\u0411\u0435\u0440\u043b\u0438\u043d",
+            "zh": "\u67cf\u6797"
+        },
+        "type": "location"
+    },
+    {
+        "_id": 448103,
+        "alternativeNames": {},
+        "coreCountry": true,
+        "country": "Italy",
+        "countryCode": "IT",
+        "countryId": 106,
+        "distance": null,
+        "fullName": "Berlingo, Italy",
+        "geo_position": {
+            "latitude": 45.50298,
+            "longitude": 10.04366
+        },
+        "iata_airport_code": null,
+        "inEurope": true,
+        "key": null,
+        "locationId": 147721,
+        "name": "Berlingo",
+        "names": {},
+        "type": "location"
+    },
+    {
+        "_id": 425332,
+        "alternativeNames": {},
+        "coreCountry": true,
+        "country": "Germany",
+        "countryCode": "DE",
+        "countryId": 56,
+        "distance": null,
+        "fullName": "Berlingerode, Germany",
+        "geo_position": {
+            "latitude": 51.45775,
+            "longitude": 10.2384
+        },
+        "iata_airport_code": null,
+        "inEurope": true,
+        "key": null,
+        "locationId": 124675,
+        "name": "Berlingerode",
+        "names": {},
+        "type": "location"
+    },
+    {
+        "_id": 425326,
+        "alternativeNames": {},
+        "coreCountry": true,
+        "country": "Germany",
+        "countryCode": "DE",
+        "countryId": 56,
+        "distance": null,
+        "fullName": "Bernau bei Berlin, Germany",
+        "geo_position": {
+            "latitude": 52.67982,
+            "longitude": 13.58708
+        },
+        "iata_airport_code": null,
+        "inEurope": true,
+        "key": null,
+        "locationId": 124669,
+        "name": "Bernau bei Berlin",
+        "names": {
+            "de": "Bernau",
+            "ru": "\u0411\u0435\u0440\u043d\u0430\u0443",
+            "zh": "\u67cf\u6797\u9644\u8fd1\u8d1d\u5c14\u7459"
+        },
+        "type": "location"
+    },
+    {
+        "_id": 314826,
+        "alternativeNames": {},
+        "coreCountry": true,
+        "country": "Germany",
+        "countryCode": "DE",
+        "countryId": 56,
+        "distance": null,
+        "fullName": "Berlin Tegel (TXL), Germany",
+        "geo_position": {
+            "latitude": 52.5548,
+            "longitude": 13.28903
+        },
+        "iata_airport_code": "TXL",
+        "inEurope": true,
+        "key": null,
+        "locationId": null,
+        "name": "Berlin Tegel",
+        "names": {
+            "ca": "Berl\u00edn-Tegel",
+            "es": "Berl\u00edn-Tegel",
+            "it": "Berlino Tegel",
+            "nl": "Berlijn Tegel"
+        },
+        "type": "airport"
+    },
+    {
+        "_id": 314827,
+        "alternativeNames": {},
+        "coreCountry": true,
+        "country": "Germany",
+        "countryCode": "DE",
+        "countryId": 56,
+        "distance": null,
+        "fullName": "Berlin Sch\u00f6nefeld (SXF), Germany",
+        "geo_position": {
+            "latitude": 52.3887261,
+            "longitude": 13.5180874
+        },
+        "iata_airport_code": "SXF",
+        "inEurope": true,
+        "key": null,
+        "locationId": null,
+        "name": "Berlin Sch\u00f6nefeld",
+        "names": {
+            "ca": "Berl\u00edn-Sch\u00f6nefeld",
+            "es": "Berl\u00edn-Sch\u00f6nefeld",
+            "it": "Berlino Sch\u00f6nefeld",
+            "nl": "Berlijn Sch\u00f6nefeld"
+        },
+        "type": "airport"
+    },
+    {
+        "_id": 334196,
+        "alternativeNames": {},
+        "coreCountry": true,
+        "country": "Germany",
+        "countryCode": "DE",
+        "countryId": 56,
+        "distance": null,
+        "fullName": "Berlin Hbf, Germany",
+        "geo_position": {
+            "latitude": 52.525589,
+            "longitude": 13.369548
+        },
+        "iata_airport_code": null,
+        "inEurope": true,
+        "key": null,
+        "locationId": null,
+        "name": "Berlin Hbf",
+        "names": {},
+        "type": "station"
+    },
+    {
+        "_id": 333977,
+        "alternativeNames": {},
+        "coreCountry": true,
+        "country": "Germany",
+        "countryCode": "DE",
+        "countryId": 56,
+        "distance": null,
+        "fullName": "Berlin Ostbahnhof, Germany",
+        "geo_position": {
+            "latitude": 52.510972,
+            "longitude": 13.434567
+        },
+        "iata_airport_code": null,
+        "inEurope": true,
+        "key": null,
+        "locationId": null,
+        "name": "Berlin Ostbahnhof",
+        "names": {},
+        "type": "station"
+    }
+]
