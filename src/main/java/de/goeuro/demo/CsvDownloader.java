@@ -14,11 +14,7 @@ public class CsvDownloader {
 
     @Autowired
     private LocationService locationService;
-
-    public void download(String keyword) {
-        download(keyword, false);
-    }
-
+    
     public void download(String keyword, boolean override) {
         PositionSuggestion suggestion = locationService.suggestPosition(keyword);
         try {

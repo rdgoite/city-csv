@@ -68,7 +68,7 @@ public class CsvDownloaderTest {
         doReturn(suggestion).when(locationService).suggestPosition(searchKey);
 
         //when:
-        downloader.download(searchKey);
+        downloader.download(searchKey, false);
 
         //then:
         File outputFile = new File(OUTPUT_FILE_NAME);
@@ -94,7 +94,7 @@ public class CsvDownloaderTest {
         doReturn(suggestion).when(locationService).suggestPosition(anyString());
 
         //when:
-        downloader.download("non existent");
+        downloader.download("non existent", false);
 
         //then:
         File outputFile = new File(OUTPUT_FILE_NAME);
@@ -120,7 +120,7 @@ public class CsvDownloaderTest {
         doReturn(mock(PositionSuggestion.class)).when(locationService).suggestPosition(anyString());
 
         //when:
-        downloader.download("Munich");
+        downloader.download("Munich", false);
     }
 
     @Test
