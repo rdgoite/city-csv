@@ -11,11 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -43,12 +47,15 @@ public class CsvDownloaderTest {
     @Test
     public void testDownload() throws Exception {
         //given:
+        List<String> csvOutput = asList("123,Berlin,location,12.3,45.6",
+                "777,Berlingerode,location,98.7,65.4");
+
         Location berlin = mock(Location.class);
-        doReturn("123,Berlin,location,12.3,45.6").when(berlin).toCsv();
+        doReturn(csvOutput.get(0)).when(berlin).toCsv();
 
         //and:
         Location berlingerode = mock(Location.class);
-        doReturn("777,Berlingerode,location,98.7,65.4").when(berlingerode).toCsv();
+        doReturn(csvOutput.get(1)).when(berlingerode).toCsv();
 
         //and:
         String searchKey = "Berlin";
@@ -63,6 +70,14 @@ public class CsvDownloaderTest {
         File outputFile = new File(expectedFileName);
         assertTrue(outputFile.exists());
         temporaryFiles.add(expectedFileName);
+
+        //and:
+        BufferedReader reader = new BufferedReader(new FileReader(outputFile));
+        for (String expectedOutput : csvOutput) {
+            assertTrue("No more lines to read from output file.", reader.ready());
+            assertEquals(expectedOutput, reader.readLine());
+        }
+        reader.close();
     }
 
 }
