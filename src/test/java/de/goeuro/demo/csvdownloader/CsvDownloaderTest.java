@@ -4,7 +4,6 @@ import de.goeuro.demo.CsvDownloader;
 import de.goeuro.demo.Location;
 import de.goeuro.demo.LocationService;
 import de.goeuro.demo.PositionSuggestion;
-import de.goeuro.demo.exception.OutputFileExistsException;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -114,15 +114,45 @@ public class CsvDownloaderTest {
     @Test(expected=RuntimeException.class)
     public void testDownloadOutputFileExists() throws Exception {
         //given:
-        File outputFile = new File(OUTPUT_FILE_NAME);
-        outputFile.createNewFile();
-        temporaryFiles.add(OUTPUT_FILE_NAME);
+        createOutputFile();
 
         //and:
         doReturn(mock(PositionSuggestion.class)).when(locationService).suggestPosition(anyString());
 
         //when:
         downloader.download("Munich");
+    }
+
+    @Test
+    public void testDownloadOutputFileOverride() throws Exception {
+        //given:
+        createOutputFile();
+
+        //and:
+        PositionSuggestion suggestion = new PositionSuggestion(emptyList());
+        doReturn(suggestion).when(locationService).suggestPosition(anyString());
+
+        //when:
+        downloader.download("Leipzig", true);
+
+        //then:
+        File outputFile = new File(OUTPUT_FILE_NAME);
+        assertTrue(outputFile.exists());
+
+        //and:
+        BufferedReader reader = new BufferedReader(new FileReader(outputFile));
+        try {
+            assertTrue(reader.ready());
+            assertEquals("# no results found", reader.readLine());
+        } finally {
+            reader.close();
+        }
+    }
+
+    private void createOutputFile() throws IOException {
+        File outputFile = new File(OUTPUT_FILE_NAME);
+        outputFile.createNewFile();
+        temporaryFiles.add(OUTPUT_FILE_NAME);
     }
 
 }
