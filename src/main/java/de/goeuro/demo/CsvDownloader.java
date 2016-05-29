@@ -1,5 +1,6 @@
 package de.goeuro.demo;
 
+import de.goeuro.demo.exception.OutputFileExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
@@ -18,9 +19,12 @@ public class CsvDownloader {
         PositionSuggestion suggestion = locationService.suggestPosition(keyword);
         try {
             File outputFile = new File("location.csv");
-            outputFile.createNewFile();
-            List<Location> locations = suggestion.getLocations();
-            writeOutput(locations, outputFile);
+            if (outputFile.createNewFile()) {
+                List<Location> locations = suggestion.getLocations();
+                writeOutput(locations, outputFile);
+            } else {
+                throw new OutputFileExistsException();
+            }
         } catch (Exception exception) {
             throw new RuntimeException(exception);
         }

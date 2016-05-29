@@ -4,6 +4,7 @@ import de.goeuro.demo.CsvDownloader;
 import de.goeuro.demo.Location;
 import de.goeuro.demo.LocationService;
 import de.goeuro.demo.PositionSuggestion;
+import de.goeuro.demo.exception.OutputFileExistsException;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,8 @@ import static org.mockito.Mockito.mock;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes={CsvDownloaderConfiguration.class})
 public class CsvDownloaderTest {
+
+    private static final String OUTPUT_FILE_NAME = "location.csv";
 
     @Autowired
     private LocationService locationService;
@@ -68,10 +71,9 @@ public class CsvDownloaderTest {
         downloader.download(searchKey);
 
         //then:
-        String expectedFileName = "location.csv";
-        File outputFile = new File(expectedFileName);
+        File outputFile = new File(OUTPUT_FILE_NAME);
         assertTrue(outputFile.exists());
-        temporaryFiles.add(expectedFileName);
+        temporaryFiles.add(OUTPUT_FILE_NAME);
 
         //and:
         BufferedReader reader = new BufferedReader(new FileReader(outputFile));
@@ -95,10 +97,9 @@ public class CsvDownloaderTest {
         downloader.download("non existent");
 
         //then:
-        String expectedFileName = "location.csv";
-        File outputFile = new File(expectedFileName);
+        File outputFile = new File(OUTPUT_FILE_NAME);
         assertTrue(outputFile.exists());
-        temporaryFiles.add(expectedFileName);
+        temporaryFiles.add(OUTPUT_FILE_NAME);
 
         //and:
         BufferedReader reader = new BufferedReader(new FileReader(outputFile));
@@ -108,6 +109,20 @@ public class CsvDownloaderTest {
         } finally {
             reader.close();
         }
+    }
+
+    @Test(expected=RuntimeException.class)
+    public void testDownloadOutputFileExists() throws Exception {
+        //given:
+        File outputFile = new File(OUTPUT_FILE_NAME);
+        outputFile.createNewFile();
+        temporaryFiles.add(OUTPUT_FILE_NAME);
+
+        //and:
+        doReturn(mock(PositionSuggestion.class)).when(locationService).suggestPosition(anyString());
+
+        //when:
+        downloader.download("Munich");
     }
 
 }
